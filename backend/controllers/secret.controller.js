@@ -43,6 +43,7 @@ export const share = async(req, res, next) => {
     try {
         const id = req.params.id
         const hashItems = {
+            id,
             sharedAt: Date.now()
         }
         const hashes = hash(JSON.stringify(hashItems))
@@ -74,6 +75,17 @@ export const getShared = async(req, res, next) => {
         }
 
         return res.status(200).json(secret);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const remove = async(req, res, next) => {
+    try {
+        const id = req.params.id
+        const secret = await service.remove(id)
+
+        return res.status(200).json({ message: 'Deleted successfully'});
     } catch (error) {
         next(error);
     }

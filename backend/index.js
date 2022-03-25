@@ -15,12 +15,21 @@ const __dirname = path.dirname(__filename);
 connectToDB()
 setEnvironment(app)
 
-
-app.get('/', (req, res) => {
-    res.send('Server is ready')
-})
+if(process.env.NODE_ENV === 'development') {
+    app.get('/', (req, res) => {
+        res.send('Server is ready')
+    })
+}
 
 registerRoutes(app)
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+    });
+}
+
 
 
 app.use((err, req, res, next) => {
@@ -37,5 +46,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
+    console.log(`Node env is ${process.env.NODE_ENV}`)
     console.log(`Server is running on port ${PORT}`)
 })

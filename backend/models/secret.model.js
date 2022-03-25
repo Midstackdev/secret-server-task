@@ -18,8 +18,10 @@ const secretSchema = mongoose.Schema({
         default: []
     }
 }, 
-    { toJSON: { getters: true }},
-    { timestamps: true },
+    { 
+        timestamps: true ,
+        toJSON: { getters: true }
+    }
 )
 
 function encryptText (text) {

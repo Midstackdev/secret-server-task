@@ -7,6 +7,7 @@ const router = express.Router()
 router.post('/', isAuth, controller.create)
 router.get('/', isAuth, controller.index)
 router.get('/:id', isAuth, controller.show)
+router.delete('/:id', isAuth, controller.remove)
 router.post('/share/:id', isAuth, controller.share)
 router.get('/share/:hash', controller.getShared)
 

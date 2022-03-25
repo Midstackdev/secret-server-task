@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "start-dev": "yarn build & node server.js",
+    "start": "node index.js",
+    "start-dev": "yarn build & node index.js",
     "build": "cd ../frontend && yarn run build",
-    "dev": "nodemon server.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

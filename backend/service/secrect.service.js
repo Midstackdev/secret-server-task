@@ -63,3 +63,12 @@ export const getShared = async(hash) => {
         throw error;
     }
 }
+
+export const remove = async(id) => {
+    try {
+        const secret = await Secret.findByIdAndDelete(id)
+         return secret;
+    } catch (error) {
+        throw error;
+    }
+}
