@@ -15,12 +15,12 @@ export default function Home() {
 
         return setModal(true);
     }
-    const hadnleCreateSecret = () => {
+    const handleCreateSecret = () => {
 
         return setModal(true);
     }
 
-    const hadnleShareSecret = async(id) => {
+    const handleShareSecret = async(id) => {
         try {
             const { data } = await axios.post(`/secret/share/${id}`)
             setMessage(`This secret is available to view for 15mins here ${document.location.origin}/share/${data.hashes}/`);
@@ -57,7 +57,7 @@ export default function Home() {
 
   return (
     <div className="container">
-        <Navbar createSecret={() => hadnleCreateSecret()}/>
+        <Navbar createSecret={() => handleCreateSecret()}/>
         <h4 className="text-center mt-2">My Secrets</h4>
         { message && <MessageBox variant="success">{message}</MessageBox>}
         { loading && 'loading...'}
@@ -70,7 +70,7 @@ export default function Home() {
                     value={x++} 
                     secret={secret} 
                     remove={() => handleDelete(secret._id)}
-                    share={() => hadnleShareSecret(secret._id)}
+                    share={() => handleShareSecret(secret._id)}
                 />
             ))
         }

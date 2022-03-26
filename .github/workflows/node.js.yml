@@ -42,7 +42,8 @@ jobs:
           CI: false
       # - run: npm test --if-present
       #   working-directory: ${{ env.server }}
-      - run: |
+      - name: Restart the server
+        run: |
           pm2 stop 3
           pm2 start 3
           pm2 save
