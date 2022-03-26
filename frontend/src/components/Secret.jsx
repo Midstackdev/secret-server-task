@@ -8,7 +8,7 @@ export default function Secret({ getData, value, secret, remove, share }) {
             <div className="card">
                 <div className="card-body">
                 <h5 className="card-title">Secret no. {value}</h5>
-                <p className="card-text">{secret.text}</p>
+                <p className="card-text">{secret.text.split(' ').splice(0, 50).join(' ')}...</p>
                 <p>{new Date(secret.createdAt).toDateString()}</p>
                 </div>
                 <div className="card-footer">
