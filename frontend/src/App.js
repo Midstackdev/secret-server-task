@@ -7,7 +7,7 @@ import PrivateSecret from './pages/PrivateSecret';
 import PublicSecret from './pages/PublicSecret';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:5001/api/';
+// axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.baseURL = `${document.location.origin}/api/`;
 const token  =  localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'))?.accessToken 
 

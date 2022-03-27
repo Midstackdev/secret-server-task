@@ -10,6 +10,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [secrets, setSecrets] = useState([])
     const [message, setMessage] = useState('')
+    const [copySuccess, setCopySuccess] = useState('');
 
     const getData = () => {
 
@@ -20,10 +21,15 @@ export default function Home() {
         return setModal(true);
     }
 
+    const copyToClipboard = (e) => {
+        navigator.clipboard.writeText(message)
+        setCopySuccess('Link Copied!')
+    }
+
     const handleShareSecret = async(id) => {
         try {
             const { data } = await axios.post(`/secret/share/${id}`)
-            setMessage(`This secret is available to view for 15mins here ${document.location.origin}/share/${data.hashes}/`);
+            setMessage(`${document.location.origin}/share/${data.hashes}`);
         } catch (error) {
             console.log(error)
         }
@@ -59,7 +65,15 @@ export default function Home() {
     <div className="container">
         <Navbar createSecret={() => handleCreateSecret()}/>
         <h4 className="text-center mt-2">My Secrets</h4>
-        { message && <MessageBox variant="success">{message}</MessageBox>}
+        { message && (
+            <div className={`alert alert-info`}>
+                This secret is available to view for 15mins here {message}
+                <div>
+                    <button className="btn btn-sm btn-primary" onClick={copyToClipboard}>Copy</button> 
+                        {copySuccess}
+                    </div>
+                </div>
+        )}
         { loading && 'loading...'}
         { !loading && !secrets.length && <MessageBox variant="warning">{"Crate some secrets"}</MessageBox>}
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-4">
